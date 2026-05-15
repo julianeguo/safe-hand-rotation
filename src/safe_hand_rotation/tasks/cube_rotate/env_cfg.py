@@ -134,8 +134,8 @@ def cube_rotate_env_cfg() -> ManagerBasedRlEnvCfg:
         # Robot sends target joint positions to its 16 motors.
         actions={
             "joint_pos": JointPositionActionCfg(
-                asset_name="robot",
-                joint_names=(".*",),
+                entity_name="robot",
+                actuator_names=(".*",),
             ),
         },
 
