@@ -142,7 +142,7 @@ def cube_rotate_env_cfg() -> ManagerBasedRlEnvCfg:
         # ── Observations: what the robot sees ───────────────────────────
         observations={
             "policy": ObservationGroupCfg(
-                observation_terms={
+                terms={
                     "joint_pos": ObservationTermCfg(
                         func=joint_pos_rel,
                         params={"asset_cfg": ROBOT_CFG},
