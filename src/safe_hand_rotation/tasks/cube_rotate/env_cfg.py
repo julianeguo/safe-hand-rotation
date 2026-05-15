@@ -78,10 +78,10 @@ def get_cube_spec(cube_size: float = 0.0375, mass: float = 0.1) -> mujoco.MjSpec
 # --------------------------------------------------------------------------- #
 # Environment configuration
 # --------------------------------------------------------------------------- #
-def cube_rotate_env_cfg() -> ManagerBasedRlEnvCfg:
+def cube_rotate_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
     """Build and return the full environment config."""
 
-    return ManagerBasedRlEnvCfg(
+    cfg = ManagerBasedRlEnvCfg(
 
         # ── Simulation settings ─────────────────────────────────────────
         sim=SimulationCfg(
@@ -246,3 +246,8 @@ def cube_rotate_env_cfg() -> ManagerBasedRlEnvCfg:
         metrics={},
         recorders={},
     )
+
+    if play:
+        cfg.episode_length_s = 1e9
+
+    return cfg
