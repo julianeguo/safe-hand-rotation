@@ -6,5 +6,6 @@ from safe_hand_rotation.tasks.cube_rotate.rl_cfg import ppo_cfg
 register_mjlab_task(
     task_id="SafeHandRotation-LeapLeft-v0",
     env_cfg=cube_rotate_env_cfg(),
+    play_env_cfg=cube_rotate_env_cfg(play=True),
     rl_cfg=ppo_cfg(),
 )
