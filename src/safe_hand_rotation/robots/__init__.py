@@ -1,0 +1,2 @@
+# src/safe_hand_rotation/robots/__init__.py
+from safe_hand_rotation.robots.leap_hand_constants import get_leap_left_hand_cfg
