@@ -2,7 +2,8 @@
 
 import argparse
 
-from mjlab.tasks.registry import load_env_cfg, load_rl_cfg, load_runner_cls
+from mjlab.tasks.registry import load_env_cfg, load_rl_cfg
+from mjlab.rl import MjlabOnPolicyRunner
 
 # This import triggers task registration
 import safe_hand_rotation.tasks  # noqa: F401
@@ -31,8 +32,7 @@ def main():
         rl_cfg.max_iterations = args.max_iterations
 
     # Create runner and train
-    Runner = load_runner_cls(args.task)
-    runner = Runner(env_cfg, rl_cfg)
+    runner = MjlabOnPolicyRunner(env_cfg, rl_cfg)
     runner.learn()
 
 
