@@ -26,6 +26,10 @@ def ppo_cfg() -> RslRlOnPolicyRunnerCfg:
             activation="elu",
             obs_normalization=True,
         ),
+        obs_groups={
+            "actor": ("policy",),
+            "critic": ("policy",),
+        },
 
         # ── PPO algorithm settings ─────────────────────────────────
         algorithm=RslRlPpoAlgorithmCfg(
