@@ -20,6 +20,10 @@ def ppo_cfg() -> RslRlOnPolicyRunnerCfg:
             hidden_dims=(512, 512, 256),
             activation="elu",
             obs_normalization=True,
+            distribution_cfg={
+                "class_name": "GaussianDistribution",
+                "init_std": 0.7,
+            },
         ),
         critic=RslRlModelCfg(
             hidden_dims=(512, 512, 256),
