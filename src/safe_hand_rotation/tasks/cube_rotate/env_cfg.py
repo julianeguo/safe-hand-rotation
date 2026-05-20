@@ -110,7 +110,7 @@ def cube_rotate_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
                 "robot": get_leap_left_hand_cfg(),
                 "cube": EntityCfg(
                     init_state=EntityCfg.InitialStateCfg(
-                        pos=(0.0, 0.0, 0.1),
+                        pos=(0.0, 0.0, 0.18),
                         rot=(1.0, 0.0, 0.0, 0.0),
                     ),
                     spec_fn=get_cube_spec,
