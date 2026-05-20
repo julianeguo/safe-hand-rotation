@@ -49,6 +49,10 @@ def main():
 
     # Reset and let the hand settle with zero actions
     env.reset()
+    # diagnostic print statements
+    print(f"  After reset - Cube pos: {cube.data.root_link_pos_w.mean(dim=0).cpu().numpy()}")
+    print(f"  After reset - Palm pos: {robot.data.body_link_pos_w[:, palm_body_id].mean(dim=0).cpu().numpy()}")
+    print(f"  After reset - Robot root: {robot.data.root_link_pos_w.mean(dim=0).cpu().numpy()}")
     for step in range(settle_steps):
         env.step(zero_action)
         if (step + 1) % 60 == 0:
