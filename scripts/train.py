@@ -7,7 +7,7 @@ from mjlab.rl import MjlabOnPolicyRunner
 
 # This import triggers task registration
 import safe_hand_rotation.tasks  # noqa: F401
-
+import dataclasses
 
 def main():
     parser = argparse.ArgumentParser(description="Train cube rotation policy")
@@ -32,7 +32,8 @@ def main():
         rl_cfg.max_iterations = args.max_iterations
 
     # Create runner and train
-    runner = MjlabOnPolicyRunner(env_cfg, rl_cfg)
+    rl_dict = dataclasses.asdict(rl_cfg)
+    runner = MjlabOnPolicyRunner(env_cfg, rl_dict)
     runner.learn()
 
 
