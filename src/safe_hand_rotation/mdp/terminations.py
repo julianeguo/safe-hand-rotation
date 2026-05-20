@@ -20,4 +20,4 @@ def cube_dropped(
     minimum_height: float,
 ) -> torch.Tensor:
     cube = env.scene[object_name]
-    return (cube.data.root_link_pos_w[:, 2] < minimum_height).float()
+    return (cube.data.root_link_pos_w[:, 2] < minimum_height)
