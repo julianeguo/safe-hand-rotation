@@ -26,7 +26,7 @@ from mjlab.utils.spec_config import CollisionCfg
 # --------------------------------------------------------------------------- #
 # Paths
 # --------------------------------------------------------------------------- #
-_ROBOT_DIR = Path(__file__).parent / "leap_hand"
+_ROBOT_DIR = Path(__file__).parent
 LEAP_LEFT_XML = _ROBOT_DIR / "xmls" / "left_hand.xml"
 
 
