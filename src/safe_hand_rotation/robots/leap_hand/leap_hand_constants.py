@@ -182,14 +182,10 @@ def get_spec() -> mujoco.MjSpec:
 HOME_POSE = EntityCfg.InitialStateCfg(
     pos=(0.0, 0.0, 0.1),
     joint_pos={
-        # Index
-        "if_mcp": 0.131, "if_rot": 0.0, "if_pip": 0.65, "if_dip": 1.0,
-        # Middle
-        "mf_mcp": 0.131, "mf_rot": 0.0, "mf_pip": 0.65, "mf_dip": 1.0,
-        # Ring
-        "rf_mcp": 0.131, "rf_rot": 0.0, "rf_pip": 0.65, "rf_dip": 1.0,
-        # Thumb
-        "th_cmc": 0.8, "th_axl": -0.78, "th_mcp": 0.5, "th_ipl": 0.367,
+        "if_mcp": 0.1, "if_rot": 0.4, "if_pip": 1.3, "if_dip": 0.0,
+        "mf_mcp": 0.1, "mf_rot": 0.0, "mf_pip": 1.3, "mf_dip": 0.0,
+        "rf_mcp": 0.1, "rf_rot": -0.4, "rf_pip": 1.3, "rf_dip": 0.0,
+        "th_cmc": 1.45, "th_axl": -1.5, "th_mcp": 0.579, "th_ipl": 1.37,
     },
     joint_vel={".*": 0.0},
 )
