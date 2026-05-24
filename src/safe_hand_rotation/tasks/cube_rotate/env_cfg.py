@@ -175,7 +175,7 @@ def cube_rotate_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
         rewards={
             "yaw_rate": RewardTermCfg(
                 func=yaw_rate_reward,
-                weight=1.25,
+                weight=3.0, # was 1.25
                 params={"object_name": "cube"},
             ),
             "fallen_penalty": RewardTermCfg(
