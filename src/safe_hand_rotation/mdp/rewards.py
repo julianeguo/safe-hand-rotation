@@ -97,3 +97,19 @@ class yaw_rate_reward:
         drift_factor = torch.where(in_bounds, 1.0, 0.1)
 
         return yaw_reward * drift_factor
+
+def object_fallen(
+        env: ManagerBasedRlEnv,
+        object_name: str,
+        minimum_height: float,
+    ) -> torch.Tensor:
+        cube = env.scene[object_name]
+        return (cube.data.root_link_pos_w[:, 2] < minimum_height).float()
+
+def joint_torque_penalty(
+        env: ManagerBasedRlEnv,
+        asset_cfg: SceneEntityCfg = SceneEntityCfg("robot", joint_names=(".*",)),
+    ) -> torch.Tensor:
+        robot = env.scene[asset_cfg.name]
+        torques = torch.square(robot.data.actuator_force[:, asset_cfg.joint_ids]) # squares all values -> L2 regularization
+        return torch.sum(torques, dim= -1) # one sum per env
