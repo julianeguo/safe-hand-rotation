@@ -15,7 +15,7 @@ import mujoco
 
 from mjlab.envs import ManagerBasedRlEnvCfg
 from mjlab.envs import mdp as envs_mdp
-from mjlab.envs.mdp import JointPositionActionCfg
+from mjlab.envs.mdp import RelativeJointPositionActionCfg
 from mjlab.entity import EntityCfg
 from mjlab.managers.observation_manager import ObservationGroupCfg, ObservationTermCfg
 from mjlab.managers.reward_manager import RewardTermCfg
@@ -134,9 +134,10 @@ def cube_rotate_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
         # ── Actions: what the robot can do ──────────────────────────────
         # Robot sends target joint positions to its 16 motors.
         actions={
-            "joint_pos": JointPositionActionCfg(
+            "joint_pos": RelativeJointPositionActionCfg(
                 entity_name="robot",
                 actuator_names=(".*",),
+                scale=0.1, # multiply output by 0.1 before adding to ensure smaller, smoother actions
             ),
         },
 
@@ -175,7 +176,7 @@ def cube_rotate_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
         rewards={
             "yaw_rate": RewardTermCfg(
                 func=yaw_rate_reward,
-                weight=3.0, # was 1.25
+                weight=1.25
                 params={"object_name": "cube"},
             ),
             "fallen_penalty": RewardTermCfg(
