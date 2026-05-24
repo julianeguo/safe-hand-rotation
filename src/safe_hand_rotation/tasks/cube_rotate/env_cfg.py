@@ -137,7 +137,7 @@ def cube_rotate_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
             "joint_pos": RelativeJointPositionActionCfg(
                 entity_name="robot",
                 actuator_names=(".*",),
-                scale=0.1, # multiply output by 0.1 before adding to ensure smaller, smoother actions
+                scale=1.0, # multiply output by scale before adding to ensure smaller, smoother actions
             ),
         },
 
