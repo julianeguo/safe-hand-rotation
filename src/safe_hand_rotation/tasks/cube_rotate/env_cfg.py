@@ -26,6 +26,7 @@ from mjlab.scene import SceneCfg
 from mjlab.sim import MujocoCfg, SimulationCfg
 from mjlab.terrains import TerrainEntityCfg
 from mjlab.viewer import ViewerConfig
+from safe_hand_rotation.mdp.events import reset_from_grasp_cache
 
 from safe_hand_rotation.robots import get_leap_left_hand_cfg
 from safe_hand_rotation.mdp.observations import (
@@ -236,6 +237,13 @@ def cube_rotate_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
                         "yaw": (-3.14, 3.14),
                     },
                     "velocity_range": {},
+                },
+            ),
+            "reset_grasp": EventTermCfg(
+                func=reset_from_grasp_cache,
+                mode="reset",
+                params={
+                    "cache_file": "src/safe_hand_rotation/tasks/cube_rotate/grasp_cache.npz",
                 },
             ),
         },
