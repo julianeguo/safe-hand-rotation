@@ -57,7 +57,7 @@ def main():
     # For CPO, inject CPO-specific settings into the config dict
     if args.algo == "cpo":
         rl_dict["algorithm"]["class_name"] = "safe_hand_rotation.algos.cpo.CPO"
-        rl_dict["algorithm"]["cost_limit"] = 0.1
+        rl_dict["algorithm"]["cost_limit"] = 0.2
         rl_dict["algorithm"]["lagrange_lr"] = 0.01
         rl_dict["algorithm"]["initial_lagrange"] = 0.0
         rl_dict["algorithm"]["rnd_cfg"] = None
