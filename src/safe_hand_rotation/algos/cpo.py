@@ -217,70 +217,16 @@ class CPO(PPO):
     # ------------------------------------------------------------------
 
     def update(self) -> dict[str, float]:
-        """Run PPO update on penalized rewards, then train cost critic.
-
-        Returns a dict of loss values for logging.
-        """
+        """Run PPO update on penalized rewards, then log CPO metrics."""
         # PPO update: trains actor and reward critic on penalized rewards.
-        # Because we subtracted lambda*cost from rewards in process_env_step,
-        # the actor automatically learns to avoid high-cost actions when lambda
-        # is large, and focuses on reward when lambda is small.
         losses = super().update()
 
-        # --- Train cost critic ---
-        # The cost critic learns to predict future costs, similar to how
-        # the reward critic predicts future rewards.
-        cost_value_loss_total = 0.0
-        num_updates = 0
-
-        # Flatten cost data for training
-        cost_values_flat = self.cost_values.reshape(-1, 1)
-        cost_returns_flat = self.cost_returns.reshape(-1, 1)
-        num_samples = cost_values_flat.shape[0]
-
-        if num_samples > 0:
-            # Train for same number of epochs as PPO
-            for _ in range(self.num_learning_epochs):
-                # Shuffle indices and create mini-batches
-                indices = torch.randperm(num_samples, device=self.device)
-                batch_size = num_samples // self.num_mini_batches
-
-                for i in range(self.num_mini_batches):
-                    start = i * batch_size
-                    end = start + batch_size
-                    batch_idx = indices[start:end]
-
-                    # Get cost returns for this batch (targets)
-                    cost_returns_batch = cost_returns_flat[batch_idx]
-
-                    # Get observations for this batch from main storage
-                    # We need to recompute cost values from observations
-                    # Use stored cost values as a simpler approach
-                    cost_values_batch = cost_values_flat[batch_idx]
-
-                    # MSE loss: train cost critic to predict cost returns
-                    cost_value_loss = (cost_returns_batch - cost_values_batch).pow(2).mean()
-
-                    self.cost_critic_optimizer.zero_grad()
-                    cost_value_loss.backward()
-                    nn.utils.clip_grad_norm_(
-                        self.cost_critic.parameters(), self.max_grad_norm
-                    )
-                    self.cost_critic_optimizer.step()
-
-                    cost_value_loss_total += cost_value_loss.item()
-                    num_updates += 1
-
-        # Add CPO-specific metrics to the loss dict for logging
-        losses["cost_value_loss"] = (
-            cost_value_loss_total / max(num_updates, 1)
-        )
+        # Log CPO-specific metrics
         losses["mean_cost"] = self.mean_episode_cost
         losses["lagrange_multiplier"] = self.lagrange_multiplier
         losses["cost_limit"] = self.cost_limit
 
         return losses
-
     # ------------------------------------------------------------------
     # Mode switching
     # ------------------------------------------------------------------
