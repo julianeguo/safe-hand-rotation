@@ -60,6 +60,7 @@ def main():
         rl_dict["algorithm"]["cost_limit"] = 0.1
         rl_dict["algorithm"]["lagrange_lr"] = 0.01
         rl_dict["algorithm"]["initial_lagrange"] = 0.0
+        rl_dict["algorithm"]["rnd_cfg"] = None
 
     # Create runner and train
     runner = MjlabOnPolicyRunner(env, rl_dict, str(log_dir), device)
