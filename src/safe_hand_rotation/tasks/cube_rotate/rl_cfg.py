@@ -58,3 +58,47 @@ def ppo_cfg() -> RslRlOnPolicyRunnerCfg:
         save_interval=100,                 # save checkpoint every 100 iters
         clip_actions=1.0,                  # clamp actions to [-1, 1]
     )
+
+
+
+def cpo_cfg() -> RslRlOnPolicyRunnerCfg:
+    """CPO training config — same network as PPO, different algorithm."""
+    return RslRlOnPolicyRunnerCfg(
+        actor=RslRlModelCfg(
+            hidden_dims=(512, 512, 256),
+            activation="elu",
+            obs_normalization=True,
+            distribution_cfg={
+                "class_name": "GaussianDistribution",
+                "init_std": 0.7,
+            },
+        ),
+        critic=RslRlModelCfg(
+            hidden_dims=(512, 512, 256),
+            activation="elu",
+            obs_normalization=True,
+        ),
+        algorithm=RslRlPpoAlgorithmCfg(
+            num_learning_epochs=5,
+            num_mini_batches=4,
+            learning_rate=1e-3,
+            schedule="adaptive",
+            gamma=0.99,
+            lam=0.95,
+            entropy_coef=0.003,
+            desired_kl=0.01,
+            max_grad_norm=1.0,
+            value_loss_coef=1.0,
+            use_clipped_value_loss=True,
+            clip_param=0.2,
+        ),
+        obs_groups={
+            "actor": ("policy",),
+            "critic": ("policy",),
+        },
+        experiment_name="leap_cube_rotate_cpo",
+        num_steps_per_env=32,
+        max_iterations=5000,
+        save_interval=100,
+        clip_actions=1.0,
+    )
