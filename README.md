@@ -1,6 +1,6 @@
 # Safe In-Hand Rotation with Constrained Policy Optimization
 
-Comparing **CPO** (Constrained Policy Optimization) against a **PPO** baseline for in-hand cube rotation using a simulated LEAP robotic hand in [MjLab](https://github.com/mujocolab/mjlab).
+Comparing **CPO (Constrained Policy Optimization)** against a **PPO** baseline for in-hand cube rotation using a simulated LEAP robotic hand in [MjLab](https://github.com/mujocolab/mjlab).
 
 PPO maximizes rotation speed using soft reward penalties. CPO enforces hard safety constraints via a Lagrangian relaxation, automatically adjusting a penalty multiplier to keep torque and drop-risk costs within a budget.
 
@@ -13,7 +13,7 @@ PPO maximizes rotation speed using soft reward penalties. CPO enforces hard safe
 | Drop penalty | 0.052 | 0.017 |
 | Lagrange multiplier | — | 0.0096 |
 
-CPO rotates slower but keeps safety costs lower — the expected safe-RL tradeoff.
+CPO rotates slower but keeps safety costs lower, which is the expected safe-RL tradeoff.
 
 ## Project Structure
 
@@ -94,7 +94,7 @@ This is a Lagrangian relaxation of the constrained optimization problem, impleme
 
 ## Acknowledgments
 
-Built on [MjLab](https://github.com/mujocolab/mjlab) and [rsl_rl](https://github.com/leggedrobotics/rsl_rl). Task design adapted from [HORA](https://github.com/haozhiqi/hora) (Qi et al., 2022). Robot model from [LEAP Hand](https://github.com/leap-hand/LEAP_Hand_Sim) (Shaw et al., 2023). Reference implementation by [Yifei Chen](https://github.com/Msornerrrr/in-hand-rotation-mjlab).
+Built on [MjLab](https://github.com/mujocolab/mjlab) and [rsl_rl](https://github.com/leggedrobotics/rsl_rl). Task design adapted from [HORA](https://github.com/haozhiqi/hora) (Qi et al., 2022). Robot model from [LEAP Hand](https://github.com/leap-hand/LEAP_Hand_Sim) (Shaw et al., 2023). Reference implementation by [Hao Jiang](https://github.com/Msornerrrr/in-hand-rotation-mjlab).
 
 ## References
 
