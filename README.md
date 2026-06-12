@@ -10,6 +10,12 @@ PPO maximizes rotation speed using soft reward penalties. CPO enforces hard safe
 |:---:|:---:|
 | ![PPO rollout](docs/ppo.gif) | ![CPO rollout](docs/cpo.gif) |
 
+*Policies were trained for 1000 iterations (~1 hour each on an A100). Motion is
+visibly unrefined, as comparable in-hand rotation work trains for substantially
+longer, so these are early-stage baselines. PPO rotates the cube faster; CPO
+rotates more cautiously to keep safety costs within budget, reflecting the
+expected safety–performance tradeoff.*
+
 ## Key Results (1000 iterations)
 
 | Metric | PPO | CPO |
