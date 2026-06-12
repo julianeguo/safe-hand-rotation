@@ -4,6 +4,12 @@ Comparing **CPO (Constrained Policy Optimization)** against a **PPO** baseline f
 
 PPO maximizes rotation speed using soft reward penalties. CPO enforces hard safety constraints via a Lagrangian relaxation, automatically adjusting a penalty multiplier to keep torque and drop-risk costs within a budget.
 
+## Learned Policies
+
+| PPO (1000 iterations) | CPO (1000 iterations) |
+|:---:|:---:|
+| ![PPO rollout](docs/ppo.gif) | ![CPO rollout](docs/cpo.gif) |
+
 ## Key Results (1000 iterations)
 
 | Metric | PPO | CPO |
